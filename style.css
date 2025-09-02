@@ -1,0 +1,18 @@
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    color: white;
+    font-size: 20px; /* opcional: para ajustar o tamanho */
+  }
+
+  /* Cor das bolinhas inativas */
+  .swiper-pagination-bullet {
+    background-color: white;
+    opacity: 0.5;
+  }
+
+  /* Cor da bolinha ativa */
+  .swiper-pagination-bullet-active {
+    background-color: white;
+    opacity: 1;
+  }

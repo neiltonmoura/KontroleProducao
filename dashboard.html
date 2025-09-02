@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard de Produção</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col items-center p-6">
+
+
+  
+  <header class="mb-8 text-center">
+    <h1 class="text-3xl font-bold mb-2">Dashboard de Produção</h1>
+    <p class="text-gray-700">Visão geral da produção dos setores por mês e ano</p>
+  </header>
+
+  <main class="max-w-5xl w-full bg-white rounded-lg shadow p-6">
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Produção Mensal (unidades)</h2>
+      <canvas id="monthlyChart" class="mb-10"></canvas>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Produção Anual (unidades)</h2>
+      <canvas id="yearlyChart"></canvas>
+    </section>
+  </main>
+
+  <script>
+    // Dados fictícios mensais (12 meses)
+    const monthlyLabels = [
+      'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+      'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    ];
+
+    const monthlyData = {
+      labels: monthlyLabels,
+      datasets: [
+        {
+          label: 'Produção A',
+          data: [120, 135, 150, 160, 175, 180, 200, 210, 190, 170, 160, 155],
+          borderColor: 'rgb(99, 102, 241)',
+          backgroundColor: 'rgba(99, 102, 241, 0.5)',
+          fill: true,
+          tension: 0.3
+        },
+        {
+          label: 'Produção B',
+          data: [100, 110, 115, 125, 130, 140, 145, 150, 155, 160, 165, 170],
+          borderColor: 'rgb(16, 185, 129)',
+          backgroundColor: 'rgba(16, 185, 129, 0.5)',
+          fill: true,
+          tension: 0.3
+        },
+        {
+          label: 'Produção C',
+          data: [90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145],
+          borderColor: 'rgb(239, 68, 68)',
+          backgroundColor: 'rgba(239, 68, 68, 0.5)',
+          fill: true,
+          tension: 0.3
+        }
+      ]
+    };
+
+    // Configurações do gráfico mensal
+    const monthlyConfig = {
+      type: 'line',
+      data: monthlyData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+          },
+          title: {
+            display: false,
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Unidades Produzidas'
+            }
+          }
+        }
+      }
+    };
+
+    // Dados anuais (soma do ano até agora)
+    const yearlyLabels = ['2023', '2024', '2025'];
+    const yearlyData = {
+      labels: yearlyLabels,
+      datasets: [
+        {
+          label: 'Produção A',
+          data: [1900, 2150, 2200],
+          backgroundColor: 'rgba(99, 102, 241, 0.7)',
+          borderRadius: 4
+        },
+        {
+          label: 'Produção B',
+          data: [1400, 1550, 1600],
+          backgroundColor: 'rgba(16, 185, 129, 0.7)',
+          borderRadius: 4
+        },
+        {
+          label: 'Produção C',
+          data: [1200, 1300, 1350],
+          backgroundColor: 'rgba(239, 68, 68, 0.7)',
+          borderRadius: 4
+        }
+      ]
+    };
+
+    // Configurações do gráfico anual
+    const yearlyConfig = {
+      type: 'bar',
+      data: yearlyData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            enabled: true,
+          },
+          title: {
+            display: false,
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Unidades Produzidas'
+            }
+          }
+        }
+      }
+    };
+
+    // Renderiza os gráficos
+    window.onload = () => {
+      const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+      new Chart(monthlyCtx, monthlyConfig);
+
+      const yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
+      new Chart(yearlyCtx, yearlyConfig);
+    };
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <title>Produção - Krontrole Produção</title>
+</head>
+
+<body>
+    <header class="bg-[#e0e3e5] py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+            <a href="./index.html">
+                <img src="https://kron.com.br/wp-content/uploads/thegem-logos/logo_e104d45fdc961198507b5bd863700253_2x.png"
+                    alt="Coloque sua logo aqui" class="h-10">
+            </a>
+
+            <!-- Ícone hambúrguer - visível apenas no mobile -->
+            <button id="menu-toggle" class="text-#e8ebed md:hidden focus:outline-none">
+                <!-- Ícone SVG do hambúrguer -->
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="./dashboard.html" class="text-[#5f727f] hover:text-[#048eb6]">Dashboard</a>
+                <a href="./producao.html" class="text-[#5f727f] hover:text-[#048eb6]">Produção</a>
+                <a href="./solicitacao.html" class="text-[#5f727f] hover:text-[#048eb6]">Solicitação</a>
+                <a href="./perdaRefugos.html" class="text-[#5f727f] hover:text-[#048eb6]">Perdas e refugos</a>
+                <a href="#configuracoes" class="text-[#5f727f] hover:text-[#048eb6]">Configurações</a>
+            </nav>
+
+            <!-- Menu Mobile (Dropdown) -->
+            <div id="mobile-menu"
+                class="absolute top-full left-0 w-full bg-gray-800 px-6 py-4 hidden flex-col space-y-4 md:hidden">
+                <a href="./dashboard.html" class="text-[#5f727f] hover:text-[#048eb6] block">Dashboard</a>
+                <a href="./producao.html" class="text-[#5f727f] hover:text-[#048eb6] block">Produção</a>
+                <a href="./solicitacao.html" class="text-[#5f727f] hover:text-[#048eb6] block">Solicitação</a>
+                <a href="./perdaRefugos.html" class="text-[#5f727f] hover:text-[#048eb6] block">Perdas e refugos</a>
+                <a href="#configuracoes" class="text-[#5f727f] hover:text-[#048eb6] block">Configurações</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-10 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Controle de Produção</h2>
+
+            <!-- Tabela de Produção -->
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+                <!-- Tabela Desktop -->
+                <div class="hidden md:block overflow-x-auto bg-white shadow-md rounded-lg mb-8">
+                    <!-- Sua <table> completa aqui -->
+
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">
+                                    Ordem</th>
+                                <th
+                                    class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">
+                                    Produto</th>
+                                <th
+                                    class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">
+                                    Quantidade</th>
+                                <th
+                                    class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">
+                                    Data</th>
+                                <th
+                                    class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">
+                                    Status</th>
+                                <th
+                                    class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">
+                                    Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-800">#00124</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Etiqueta Adesiva</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">500</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">01/09/2025</td>
+                                <td class="px-6 py-4">
+                                    <select onchange="atualizarStatus(this)"
+                                        class="status-select px-2 py-1 text-xs rounded-full leading-5 font-semibold">
+                                        <option value="em_andamento" selected>Em andamento</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="parado">Parado</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                                    <button class="text-red-600 hover:text-red-900 text-sm ml-4">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-800">#00124</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Etiqueta Adesiva</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">500</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">01/09/2025</td>
+                                <td class="px-6 py-4">
+                                    <select onchange="atualizarStatus(this)"
+                                        class="status-select px-2 py-1 text-xs rounded-full leading-5 font-semibold">
+                                        <option value="em_andamento" selected>Em andamento</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="parado">Parado</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                                    <button class="text-red-600 hover:text-red-900 text-sm ml-4">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-800">#00124</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Etiqueta Adesiva</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">500</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">01/09/2025</td>
+                                <td class="px-6 py-4">
+                                    <select onchange="atualizarStatus(this)"
+                                        class="status-select px-2 py-1 text-xs rounded-full leading-5 font-semibold">
+                                        <option value="em_andamento" selected>Em andamento</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="parado">Parado</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                                    <button class="text-red-600 hover:text-red-900 text-sm ml-4">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-800">#00124</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Etiqueta Adesiva</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">500</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">01/09/2025</td>
+                                <td class="px-6 py-4">
+                                    <select onchange="atualizarStatus(this)"
+                                        class="status-select px-2 py-1 text-xs rounded-full leading-5 font-semibold">
+                                        <option value="em_andamento" selected>Em andamento</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="parado">Parado</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                                    <button class="text-red-600 hover:text-red-900 text-sm ml-4">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-800">#00124</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Etiqueta Adesiva</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">500</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">01/09/2025</td>
+                                <td class="px-6 py-4">
+                                    <select onchange="atualizarStatus(this)"
+                                        class="status-select px-2 py-1 text-xs rounded-full leading-5 font-semibold">
+                                        <option value="em_andamento" selected>Em andamento</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="parado">Parado</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                                    <button class="text-red-600 hover:text-red-900 text-sm ml-4">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-800">#00124</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Etiqueta Adesiva</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">500</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">01/09/2025</td>
+                                <td class="px-6 py-4">
+                                    <select onchange="atualizarStatus(this)"
+                                        class="status-select px-2 py-1 text-xs rounded-full leading-5 font-semibold">
+                                        <option value="em_andamento" selected>Em andamento</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="parado">Parado</option>
+                                    </select>
+                                </td>
+
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                                    <button class="text-red-600 hover:text-red-900 text-sm ml-4">Excluir</button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Lista tipo "cards" para mobile -->
+                <div class="md:hidden space-y-4">
+                    <!-- Card individual -->
+                    <div class="bg-white shadow rounded-lg p-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Ordem:</span>
+                            <span class="text-gray-800">#00124</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Produto:</span>
+                            <span class="text-gray-800">Etiqueta Adesiva</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Quantidade:</span>
+                            <span class="text-gray-800">500</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Data:</span>
+                            <span class="text-gray-800">01/09/2025</span>
+                        </div>
+                        <div class="flex justify-between mb-2 items-center">
+                            <span class="font-semibold text-gray-700">Status:</span>
+                            <select onchange="atualizarStatus(this)"
+                                class="status-select px-2 py-1 text-xs rounded-full font-semibold">
+                                <option value="em_andamento" selected>Em andamento</option>
+                                <option value="concluido">Concluído</option>
+                                <option value="parado">Parado</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end mt-4 space-x-3">
+                            <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 text-sm">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Ordem:</span>
+                            <span class="text-gray-800">#00124</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Produto:</span>
+                            <span class="text-gray-800">Etiqueta Adesiva</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Quantidade:</span>
+                            <span class="text-gray-800">500</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Data:</span>
+                            <span class="text-gray-800">01/09/2025</span>
+                        </div>
+                        <div class="flex justify-between mb-2 items-center">
+                            <span class="font-semibold text-gray-700">Status:</span>
+                            <select onchange="atualizarStatus(this)"
+                                class="status-select px-2 py-1 text-xs rounded-full font-semibold">
+                                <option value="em_andamento" selected>Em andamento</option>
+                                <option value="concluido">Concluído</option>
+                                <option value="parado">Parado</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end mt-4 space-x-3">
+                            <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 text-sm">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Ordem:</span>
+                            <span class="text-gray-800">#00124</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Produto:</span>
+                            <span class="text-gray-800">Etiqueta Adesiva</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Quantidade:</span>
+                            <span class="text-gray-800">500</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Data:</span>
+                            <span class="text-gray-800">01/09/2025</span>
+                        </div>
+                        <div class="flex justify-between mb-2 items-center">
+                            <span class="font-semibold text-gray-700">Status:</span>
+                            <select onchange="atualizarStatus(this)"
+                                class="status-select px-2 py-1 text-xs rounded-full font-semibold">
+                                <option value="em_andamento" selected>Em andamento</option>
+                                <option value="concluido">Concluído</option>
+                                <option value="parado">Parado</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end mt-4 space-x-3">
+                            <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 text-sm">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Ordem:</span>
+                            <span class="text-gray-800">#00124</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Produto:</span>
+                            <span class="text-gray-800">Etiqueta Adesiva</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Quantidade:</span>
+                            <span class="text-gray-800">500</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Data:</span>
+                            <span class="text-gray-800">01/09/2025</span>
+                        </div>
+                        <div class="flex justify-between mb-2 items-center">
+                            <span class="font-semibold text-gray-700">Status:</span>
+                            <select onchange="atualizarStatus(this)"
+                                class="status-select px-2 py-1 text-xs rounded-full font-semibold">
+                                <option value="em_andamento" selected>Em andamento</option>
+                                <option value="concluido">Concluído</option>
+                                <option value="parado">Parado</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end mt-4 space-x-3">
+                            <button class="text-blue-600 hover:text-blue-900 text-sm">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 text-sm">Excluir</button>
+                        </div>
+                    </div>
+
+                    <!-- Repita o bloco acima para cada item -->
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M11.3214 8.93666L16.4919 3.05566H15.2667L10.7772 8.16205L7.1914 3.05566H3.05566L8.47803 10.7774L3.05566 16.9446H4.28097L9.022 11.552L12.8088 16.9446H16.9446L11.3211 8.93666H11.3214ZM9.64322 10.8455L9.09382 10.0765L4.72246 3.95821H6.60445L10.1322 8.8959L10.6816 9.66481L15.2672 16.083H13.3852L9.64322 10.8458V10.8455Z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 29 29">
+                        <path
+                            d="M9.76556 14.8811C9.76556 12.3243 11.8389 10.2511 14.3972 10.2511C16.9555 10.2511 19.03 12.3243 19.03 14.8811C19.03 17.4379 16.9555 19.5111 14.3972 19.5111C11.8389 19.5111 9.76556 17.4379 9.76556 14.8811ZM7.26117 14.8811C7.26117 18.82 10.456 22.0129 14.3972 22.0129C18.3385 22.0129 21.5333 18.82 21.5333 14.8811C21.5333 10.9422 18.3385 7.7493 14.3972 7.7493C10.456 7.7493 7.26117 10.9422 7.26117 14.8811ZM20.1481 7.46652C20.148 7.79616 20.2457 8.11843 20.4288 8.39258C20.6119 8.66674 20.8723 8.88046 21.177 9.00673C21.4817 9.133 21.8169 9.16614 22.1405 9.10196C22.464 9.03778 22.7612 8.87916 22.9945 8.64617C23.2278 8.41318 23.3868 8.11627 23.4513 7.79299C23.5157 7.46972 23.4829 7.13459 23.3568 6.83C23.2307 6.5254 23.017 6.26502 22.7428 6.08178C22.4687 5.89853 22.1463 5.80065 21.8164 5.80052H21.8158C21.3737 5.80073 20.9497 5.9763 20.637 6.28867C20.3243 6.60104 20.1485 7.02467 20.1481 7.46652Z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 26">
+                        <path
+                            d="M13.7926 14.4697L14.5174 9.86889H10.0528V6.87836C10.0528 5.62033 10.6761 4.39105 12.6692 4.39105H14.7275V0.473179C13.5289 0.282204 12.3177 0.178886 11.1037 0.164062C7.42917 0.164062 5.0302 2.37101 5.0302 6.36077V9.86889H0.957031V14.4697H5.0302V25.5979H10.0528V14.4697H13.7926Z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 9v12h18V9H3z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="text-sm text-gray-400">© 2025 Krontrole Produção. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        function atualizarStatus(selectElement) {
+            const status = selectElement.value;
+
+            const statusMap = {
+                'em_andamento': {
+                    bg: 'bg-yellow-100',
+                    text: 'text-yellow-800'
+                },
+                'concluido': {
+                    bg: 'bg-green-100',
+                    text: 'text-green-800'
+                },
+                'parado': {
+                    bg: 'bg-red-100',
+                    text: 'text-red-800'
+                }
+            };
+
+            const statusInfo = statusMap[status];
+
+            // Limpa classes anteriores e adiciona novas
+            selectElement.className = 'status-select px-2 py-1 text-xs rounded font-semibold';
+            selectElement.classList.add(statusInfo.bg, statusInfo.text);
+        }
+
+        // Para atualizar os selects que já estão carregados com valor (no carregamento da página)
+        window.onload = function () {
+            const selects = document.querySelectorAll('.status-select');
+            selects.forEach(select => atualizarStatus(select));
+        };
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            toggle.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recuperar Senha</title>
+  <script>
+    // Validação simples com JS
+    function validarFormulario() {
+      const nome = document.getElementById("nome").value.trim();
+      const setor = document.getElementById("setor").value.trim();
+
+      if (!nome || !setor) {
+        alert("Por favor, preencha seu nome e setor antes de enviar.");
+        return false; // bloqueia envio
+      }
+
+      // Simula envio e exibe confirmação
+      alert("Sua solicitação foi enviada ao gestor do setor.");
+      return true;
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-300 text-gray-900 flex items-center justify-center min-h-screen px-4">
+
+  <div class="max-w-md w-full space-y-6 bg-white p-8 rounded-md shadow-lg">
+    <h2 class="text-2xl font-bold text-center">Esqueceu a senha?</h2>
+    <p class="text-sm text-gray-600 text-center">
+      Preencha seu nome e setor. O gestor será notificado para redefinir sua senha.
+    </p>
+
+    <form onsubmit="return validarFormulario();">
+      <div class="space-y-4">
+        <div>
+          <label for="nome" class="block text-sm font-medium text-gray-700">Seu nome</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Ex: João da Silva"
+          />
+        </div>
+
+
+        <!-- Setor -->
+        <div>
+          <label for="setor" class="block text-sm font-medium text-gray-700">Setor</label>
+          <select
+            id="setor"
+            name="setor"
+            class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="">Selecione...</option>
+            <option value="Eletrônica">Eletrônica</option>
+            <option value="Transformador">Transformador</option>
+            <option value="Analógico">Analógico</option>
+            <option value="Eng. Eletrônica">Eng. Eletrônica</option>
+            <option value="Eng. Aplicação">Eng. Aplicação</option>
+            <option value="Silk">Silk</option>
+            <option value="Almoxarifado">Almoxarifado</option>
+
+            <option value="Outros">Outro</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 rounded-md transition-colors duration-300"
+        >
+          Enviar solicitação
+        </button>
+      </div>
+    </form>
+
+    <div class="text-center mt-4">
+      <a href="index.html" class="text-indigo-600 hover:underline">Voltar ao login</a>
+    </div>
+  </div>
+
+</body>
+</html>

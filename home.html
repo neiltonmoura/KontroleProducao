@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Home - Krontrole Produção</title>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="bg-[#e0e3e5] py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+            <a href="./home.html">
+                <img src="https://kron.com.br/wp-content/uploads/thegem-logos/logo_e104d45fdc961198507b5bd863700253_2x.png"
+                    alt="Coloque sua logo aqui" class="h-10">
+            </a>
+
+            <!-- Ícone hambúrguer - visível apenas no mobile -->
+            <button id="menu-toggle" class="text-#e8ebed md:hidden focus:outline-none">
+                <!-- Ícone SVG do hambúrguer -->
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="./dashboard.html" class="text-[#5f727f] hover:text-[#048eb6]">Dashboard</a>
+                <a href="./producao.html" class="text-[#5f727f] hover:text-[#048eb6]">Produção</a>
+                <a href="./solicitacao.html" class="text-[#5f727f] hover:text-[#048eb6]">Solicitação</a>
+                <a href="#relatorios" class="text-[#5f727f] hover:text-[#048eb6]">Perdas e refugos</a>
+                <a href="#configuracoes" class="text-[#5f727f] hover:text-[#048eb6]">Configurações</a>
+            </nav>
+
+            <!-- Menu Mobile (Dropdown) -->
+            <div id="mobile-menu"
+                class="absolute top-full left-0 w-full bg-gray-800 px-6 py-4 hidden flex-col space-y-4 md:hidden">
+                <a href="./dashboard.html" class="text-[#5f727f] hover:text-[#048eb6] block">Dashboard</a>
+                <a href="./producao.html" class="text-[#5f727f] hover:text-[#048eb6] block">Produção</a>
+                <a href="./solicitacao.html" class="text-[#5f727f] hover:text-[#048eb6] block">Solicitação</a>
+                <a href="#relatorios" class="text-[#5f727f] hover:text-[#048eb6] block">Perdas e refugos</a>
+                <a href="#configuracoes" class="text-[#5f727f] hover:text-[#048eb6] block">Configurações</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section (Hero + Information) -->
+    <main class="bg-white text-[#3c3950] min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-lg text-center">
+            <h1 class="text-4xl font-bold tracking-tight ">Bem-vindo ao Krontrole Produção!</h1>
+            <p class="mt-4 text-lg">Gerencie sua produção de maneira eficiente e simplificada. Acesse os dados de
+                produção, relatórios, e muito mais!</p>
+            <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                <!-- Botão Dashboard -->
+                <a href="dashboard.html">
+                    <button
+                        class="px-6 py-2 bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-300 rounded-md text-white text-lg font-semibold">
+                        Acessar Dashboard
+                    </button>
+                </a>
+
+                <!-- Botão Relatórios -->
+                <a href="relatorios.html">
+                    <button
+                        class="px-6 py-2 bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-300 rounded-md text-white text-lg font-semibold">
+                        Relatórios
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="swiper w-full max-w-xl mx-auto p-4 mt-9 bg-gray-900 rounded-lg text-white">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide flex flex-col items-center justify-center text-center p-8">
+                    <h2 class="text-3xl font-bold">Produção Total</h2>
+                    <p class="mt-2 text-xl">12.450 instrumentos</p>
+                </div>
+                <div class="swiper-slide flex flex-col items-center justify-center text-center p-8">
+                    <h2 class="text-3xl font-bold">Produção Setor eletrônica</h2>
+                    <p class="mt-2 text-xl">3.120 instrumentos</p>
+                </div>
+                <div class="swiper-slide flex flex-col items-center justify-center text-center p-8">
+                    <h2 class="text-3xl font-bold">Produção Setor transformadores</h2>
+                    <p class="mt-2 text-xl">4.850 instrumentos</p>
+                </div>
+                <div class="swiper-slide flex flex-col items-center justify-center text-center p-8">
+                    <h2 class="text-3xl font-bold">Produção Setor analógico</h2>
+                    <p class="mt-2 text-xl">4.850 instrumentos</p>
+                </div>
+            </div>
+
+            <!-- Botões de navegação -->
+            <div class="swiper-button-prev text-white"></div>
+            <div class="swiper-button-next text-white"></div>
+
+            <!-- Paginação (bolinhas) -->
+            <div class="swiper-pagination mt-4"></div>
+        </div>
+
+
+
+        <!-- Quick Info Sections -->
+        <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-white">
+            <a href="./producao.html" class="relative group block cursor-pointer">
+                <div class="bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-500 p-6 rounded-md text-center">
+                    <h2 class="text-2xl font-semibold ">Produção total</h2>
+                    <p class="mt-4 text-lg ">Acompanhe a produção de todos os itens em tempo real.</p>
+                </div>
+
+                <!-- Sobreposição com link "Acessar" -->
+                <div
+                    class="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-4xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-md">
+                    Acessar
+                </div>
+            </a>
+
+            <a href="./relatorio.html" class="relative group block cursor-pointer">
+                <div class="bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-500 p-6 rounded-md text-center">
+                    <h2 class="text-2xl font-semibold">Relatórios</h2>
+                    <p class="mt-4 text-lg">Gere relatórios detalhados sobre a produção e vendas.</p>
+                </div>
+
+                <!-- Sobreposição com link "Acessar" -->
+                <div
+                    class="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-4xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-md">
+                    Acessar
+                </div>
+            </a>
+
+            <a href="./solicitacao.html" class="relative group block cursor-pointer">
+                <div class="bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-500 p-6 rounded-md text-center">
+                    <h2 class="text-2xl font-semibold">Solicitação</h2>
+                    <p class="mt-4 text-lg">Solicitação de material para a produção ao almoxarifado.</p>
+                </div>
+
+                <!-- Sobreposição com link "Acessar" -->
+                <div
+                    class="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-4xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-md">
+                    Acessar
+                </div>
+            </a>
+
+        </div>
+
+        <div class="mt-8 grid grid-cols-1  lg:grid-cols-2 gap-8 text-white">
+            <a href="./perdasReugos.html" class="relative group block cursor-pointer">
+                <div class="bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-500 p-6 rounded-md text-center">
+                    <h2 class="text-2xl font-semibold ">Perdas e refugos</h2>
+                    <p class="mt-4 text-lg ">Acompanhar perdas e refugos (adicionar / baixar).</p>
+                </div>
+
+                <!-- Sobreposição com link "Acessar" -->
+                <div
+                    class="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-4xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-md">
+                    Acessar
+                </div>
+            </a>
+
+            <a href="./configuracao.html" class="relative group block cursor-pointer">
+                <div class="bg-[#048eb6] hover:bg-[#048eb6]/60 transition-all duration-500 p-6 rounded-md text-center">
+                    <h2 class="text-2xl font-semibold">Configurações</h2>
+                    <p class="mt-4 text-lg">Acesse as configurações.</p>
+                </div>
+
+                <!-- Sobreposição com link "Acessar" -->
+                <div
+                    class="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-4xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-md">
+                    Acessar
+                </div>
+            </a>
+
+
+
+        </div>
+
+
+
+
+
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M11.3214 8.93666L16.4919 3.05566H15.2667L10.7772 8.16205L7.1914 3.05566H3.05566L8.47803 10.7774L3.05566 16.9446H4.28097L9.022 11.552L12.8088 16.9446H16.9446L11.3211 8.93666H11.3214ZM9.64322 10.8455L9.09382 10.0765L4.72246 3.95821H6.60445L10.1322 8.8959L10.6816 9.66481L15.2672 16.083H13.3852L9.64322 10.8458V10.8455Z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 29 29">
+                        <path
+                            d="M9.76556 14.8811C9.76556 12.3243 11.8389 10.2511 14.3972 10.2511C16.9555 10.2511 19.03 12.3243 19.03 14.8811C19.03 17.4379 16.9555 19.5111 14.3972 19.5111C11.8389 19.5111 9.76556 17.4379 9.76556 14.8811ZM7.26117 14.8811C7.26117 18.82 10.456 22.0129 14.3972 22.0129C18.3385 22.0129 21.5333 18.82 21.5333 14.8811C21.5333 10.9422 18.3385 7.7493 14.3972 7.7493C10.456 7.7493 7.26117 10.9422 7.26117 14.8811ZM20.1481 7.46652C20.148 7.79616 20.2457 8.11843 20.4288 8.39258C20.6119 8.66674 20.8723 8.88046 21.177 9.00673C21.4817 9.133 21.8169 9.16614 22.1405 9.10196C22.464 9.03778 22.7612 8.87916 22.9945 8.64617C23.2278 8.41318 23.3868 8.11627 23.4513 7.79299C23.5157 7.46972 23.4829 7.13459 23.3568 6.83C23.2307 6.5254 23.017 6.26502 22.7428 6.08178C22.4687 5.89853 22.1463 5.80065 21.8164 5.80052H21.8158C21.3737 5.80073 20.9497 5.9763 20.637 6.28867C20.3243 6.60104 20.1485 7.02467 20.1481 7.46652Z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 26">
+                        <path
+                            d="M13.7926 14.4697L14.5174 9.86889H10.0528V6.87836C10.0528 5.62033 10.6761 4.39105 12.6692 4.39105H14.7275V0.473179C13.5289 0.282204 12.3177 0.178886 11.1037 0.164062C7.42917 0.164062 5.0302 2.37101 5.0302 6.36077V9.86889H0.957031V14.4697H5.0302V25.5979H10.0528V14.4697H13.7926Z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-white hover:text-indigo-400">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 9v12h18V9H3z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="text-sm text-gray-400">© 2025 Krontrole Produção. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            const menu = document.getElementById("mobile-menu");
+            menu.classList.toggle("hidden");
+        });
+    </script>
+
+    <script>
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 3000, // tempo entre os slides em milissegundos (3s)
+                disableOnInteraction: false, // continua mesmo após interação
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
+
+</body>
+
+</html>

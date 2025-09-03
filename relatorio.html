@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- html2canvas para PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- SheetJS (XLSX) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
+  <!-- Swiper CSS e JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  
+  <link rel="stylesheet" href="./style.css" />
+  <title>Relatório - Krontrole Produção</title>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#e0e3e5] py-6">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+      <a href="./home.html">
+        <img src="https://kron.com.br/wp-content/uploads/thegem-logos/logo_e104d45fdc961198507b5bd863700253_2x.png"
+             alt="Logo" class="h-10" />
+      </a>
+      <button id="menu-toggle" class="text-#e8ebed md:hidden focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor"
+             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <nav class="hidden md:flex space-x-6">
+        <a href="./dashboard.html" class="text-[#5f727f] hover:text-[#048eb6]">Dashboard</a>
+        <a href="./producao.html" class="text-[#5f727f] hover:text-[#048eb6]">Produção</a>
+        <a href="./solicitacao.html" class="text-[#5f727f] hover:text-[#048eb6]">Solicitação</a>
+        <a href="#relatorios" class="text-[#5f727f] hover:text-[#048eb6]">Perdas e Refugos</a>
+        <a href="#configuracoes" class="text-[#5f727f] hover:text-[#048eb6]">Configurações</a>
+      </nav>
+      <div id="mobile-menu" class="absolute top-full left-0 w-full bg-gray-800 px-6 py-4 hidden flex-col space-y-4 md:hidden">
+        <a href="./dashboard.html" class="text-[#5f727f] hover:text-[#048eb6] block">Dashboard</a>
+        <a href="./producao.html" class="text-[#5f727f] hover:text-[#048eb6] block">Produção</a>
+        <a href="./solicitacao.html" class="text-[#5f727f] hover:text-[#048eb6] block">Solicitação</a>
+        <a href="#relatorios" class="text-[#5f727f] hover:text-[#048eb6] block">Perdas e Refugos</a>
+        <a href="#configuracoes" class="text-[#5f727f] hover:text-[#048eb6] block">Configurações</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-5xl w-full mx-auto bg-white rounded-lg shadow p-6 my-8">
+    <h1 class="text-3xl font-bold text-center mb-4">Relatório de Produção</h1>
+    <div class="mb-6 flex justify-end gap-4">
+      <button onclick="exportToPDF()" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded">
+        Exportar PDF
+      </button>
+      <button onclick="exportToExcel()" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded">
+        Exportar Excel
+      </button>
+    </div>
+
+    <!-- Gráficos -->
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Produção Mensal (unidades)</h2>
+      <canvas id="monthlyChart" class="mb-10"></canvas>
+    </section>
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Produção Anual (unidades)</h2>
+      <canvas id="yearlyChart" class="mb-10"></canvas>
+    </section>
+
+    <!-- Tabela de Dados -->
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Tabela de Produção Mensal</h2>
+      <div id="reportTableContainer" class="overflow-x-auto">
+        <table id="reportTable" class="min-w-full table-auto border border-gray-300 text-sm">
+          <thead class="bg-gray-100 text-left">
+            <tr>
+              <th class="border px-4 py-2">Mês</th>
+              <th class="border px-4 py-2">Produção A</th>
+              <th class="border px-4 py-2">Produção B</th>
+              <th class="border px-4 py-2">Produção C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linhas geradas por JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="flex justify-center space-x-6 mb-6">
+        <!-- Ícones de redes sociais -->
+      </div>
+      <p class="text-sm text-gray-400">© 2025 Krontrole Produção. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Toggle do menu mobile
+    document.getElementById("menu-toggle").addEventListener("click", () => {
+      document.getElementById("mobile-menu").classList.toggle("hidden");
+    });
+  </script>
+
+  <script>
+    // Dados
+    const monthlyLabels = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    const monthlyDatasets = [
+      { label: 'Produção A', data: [120,135,150,160,175,180,200,210,190,170,160,155], borderColor: 'rgb(99,102,241)', backgroundColor: 'rgba(99,102,241,0.5)' },
+      { label: 'Produção B', data: [100,110,115,125,130,140,145,150,155,160,165,170], borderColor: 'rgb(16,185,129)', backgroundColor: 'rgba(16,185,129,0.5)' },
+      { label: 'Produção C', data: [90,95,100,105,110,115,120,125,130,135,140,145], borderColor: 'rgb(239,68,68)', backgroundColor: 'rgba(239,68,68,0.5)' }
+    ];
+    const yearlyLabels = ['2023','2024','2025'];
+    const yearlyDatasets = [
+      { label: 'Produção A', data: [1900,2150,2200], backgroundColor: 'rgba(99,102,241,0.7)' },
+      { label: 'Produção B', data: [1400,1550,1600], backgroundColor: 'rgba(16,185,129,0.7)' },
+      { label: 'Produção C', data: [1200,1300,1350], backgroundColor: 'rgba(239,68,68,0.7)' }
+    ];
+
+    // Cria os gráficos
+    window.onload = () => {
+      const mctx = document.getElementById('monthlyChart').getContext('2d');
+      new Chart(mctx, {
+        type: 'line',
+        data: { labels: monthlyLabels, datasets: monthlyDatasets.map(ds => ({ ...ds, fill: true, tension: 0.3 })) },
+        options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Unidades Produzidas' } } } }
+      });
+
+      const yctx = document.getElementById('yearlyChart').getContext('2d');
+      new Chart(yctx, {
+        type: 'bar',
+        data: { labels: yearlyLabels, datasets: yearlyDatasets.map(ds => ({ ...ds, borderRadius: 4 })) },
+        options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Unidades Produzidas' } } } }
+      });
+
+      // Gera tabela com dados mensais
+      const tbody = document.querySelector('#reportTable tbody');
+      monthlyLabels.forEach((mes, i) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="border px-4 py-2">${mes}</td>
+          ${monthlyDatasets.map(ds => `<td class="border px-4 py-2">${ds.data[i]}</td>`).join('')}
+        `;
+        tbody.appendChild(row);
+      });
+    };
+
+    // Exportar para PDF
+    async function exportToPDF() {
+  const { jsPDF } = window.jspdf;
+  const element = document.getElementById('reportTableContainer');
+  
+  // Usa html2canvas para capturar o elemento
+  const canvas = await html2canvas(element, {
+    scale: 3,      // aumenta a qualidade da captura
+    scrollX: -window.scrollX,
+    scrollY: -window.scrollY,
+    windowWidth: document.documentElement.offsetWidth,
+    windowHeight: document.documentElement.offsetHeight
+  });
+  
+  const imgData = canvas.toDataURL('image/png');
+
+  // Configura o PDF (tamanho A4 - 210mm x 297mm)
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  // Ajusta a imagem para caber no PDF
+  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+  pdf.save('relatorio-producao.pdf');
+}
+
+
+    // Exportar para Excel
+    function exportToExcel() {
+      const table = document.getElementById('reportTable');
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.table_to_sheet(table);
+      XLSX.utils.book_append_sheet(wb, ws, 'Produção Mensal');
+      XLSX.writeFile(wb, 'relatorio-producao.xlsx');
+    }
+  </script>
+</body>
+</html>
